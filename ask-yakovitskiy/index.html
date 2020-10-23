@@ -6,52 +6,135 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v4.1.1">
-    <title>Sticky Footer Navbar Template · Bootstrap</title>
+    <title>AskYakovitskiy</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/sticky-footer-navbar.css" rel="stylesheet">
+    <link href="css/my.css" rel="stylesheet">
   </head>
   <body class="d-flex flex-column h-100">
     <header>
       <!-- Fixed navbar -->
       <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="#">Fixed navbar</a>
+        <a class="navbar-brand" href="#">AskYakovitskiy</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-            </li>
-          </ul>
-          <form class="form-inline mt-2 mt-md-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-          </form>
+        <form class="form-inline mt-2 mt-md-0">
+          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </div>
+      <button class="btn btn-secondary btn-sing-in">Sing in</button>
+      <button class="btn btn-primary btn-sing-up">Sing up</button>
+      <button class="btn btn-success btn-ask">Ask!</button>
+    </nav>
+  </header>
+  <div class="row popular-tags offset-10">
+    <div class="col-12">
+      Popular tags
+      <div class="col-12">
+        <label class="btn btn-link btn-tag">Perl</label>
+        <label class="btn btn-link btn-tag">Django</label>
+        <label class="btn btn-link btn-tag">Moon Park</label>
+        <label class="btn btn-link btn-tag">HTML</label>
+        <label class="btn btn-link btn-tag">CSS</label>
+        <label class="btn btn-link btn-tag">C++</label>
+        <label class="btn btn-link btn-tag">Techno-park</label>
+      </div>
+      <div class="row best-members">
+        <div class="col-12">
+          Best Members
+          <div class="col-12">
+            <label class="btn btn-link btn-best-member">Denis</label>
+            <label class="btn btn-link btn-best-member">Andrej</label>
+            <label class="btn btn-link btn-best-member">Alexei</label>
+            <label class="btn btn-link btn-best-member">Stanislav</label>
+          </div>
         </div>
-      </nav>
-    </header>
-    <!-- Begin page content -->
-    <main role="main" class="flex-shrink-0">
-      <div class="container">
-        <h1 class="mt-5">Sticky footer with fixed navbar</h1>
-        <p class="lead">Pin a footer to the bottom of the viewport in desktop browsers with this custom HTML and CSS. A fixed navbar has been added with <code>padding-top: 60px;</code> on the <code>main &gt; .container</code>.</p>
-        <p>Back to <a href="/docs/4.5/examples/sticky-footer/">the default sticky footer</a> minus the navbar.</p>
       </div>
-    </main>
-    <footer class="footer mt-auto py-3">
-      <div class="container">
-        <span class="text-muted">Place sticky footer content here.</span>
+    </div>
+  </div>
+  <!-- Begin page content -->
+  <main role="main" class="flex-shrink-0">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-10">
+          <div class="row question-box">
+            <div class="col-1">
+              <img class="question-img" src="img/question-mark.jpg">
+              <div class="row question-upvotes-downvotes">
+                <div class="btn-group">
+                  <button class="btn btn-xs btn-upvote">+</button>
+                  <button class="btn btn-xs btn-downvote">-</button>
+                  <div class="like-counter">10</div>
+                </div>
+              </div>
+              </img>
+            </div>
+            <div class="col-11">
+              <label class="btn btn-link question-title">Answer this</label>
+              <div class="question-text">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+              </div>
+              <div class="row question-answers">
+                <label class="btn btn-link btn-tag">Answers(3)</label>
+                <label class ="question-tags">Tags:</label>
+                <label class="btn btn-link btn-tag question-tag">Perl</label>
+                <label class="btn btn-link btn-tag question-tag">Django</label>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </footer>
-    <script src="js/jquery.slim.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-  </body>
+      <div class="row">
+        <div class="col-10">
+          <div class="row question-box">
+            <div class="col-1">
+              <img class="question-img" src="img/question-mark.jpg">
+              <div class="row question-upvotes-downvotes">
+                <div class="btn-group">
+                  <button class="btn btn-xs btn-upvote">+</button>
+                  <button class="btn btn-xs btn-downvote">-</button>
+                  <div class="like-counter">10</div>
+                </div>
+              </div>
+              </img>
+            </div>
+            <div class="col-11">
+              <label class="btn btn-link question-title">Answer this</label>
+              <div class="question-text">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+              </div>
+              <div class="row question-answers">
+                <label class="btn btn-link btn-tag">Answers(3)</label>
+                <label class ="question-tags">Tags:</label>
+                <label class="btn btn-link btn-tag question-tag">Perl</label>
+                <label class="btn btn-link btn-tag question-tag">Django</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<div class="btn-toolbar btns-pages" role="toolbar" aria-label="Toolbar with button groups">
+  <div class="btn-group mr-2" role="group" aria-label="First group">
+    <button type="button" class="btn btn-secondary btn-page">1</button>
+    <button type="button" class="btn btn-secondary btn-page">2</button>
+    <button type="button" class="btn btn-secondary btn-page">3</button>
+  </div>
+<script src="js/jquery.slim.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+</body>
 </html>

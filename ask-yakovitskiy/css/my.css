@@ -1,0 +1,138 @@
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+main > .container-fluid {
+  padding: 60px 15px 0;
+}
+
+.footer {
+  background-color: #f5f5f5;
+}
+
+.footer > .container {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+code {
+  font-size: 80%;
+}
+
+
+.btn-sing-in {
+	position: absolute;
+	right: 0;
+	margin-right: 10px;
+}
+
+.btn-sing-up {
+	position: absolute;
+	right: 0;
+	margin-right: 88px;
+}
+
+.btn-ask {
+	margin-left: 4px;
+}
+
+.popular-tags {
+	margin-top: 80px;
+	border-left: 1px solid grey;
+	position: absolute;
+	right: 0;
+}
+
+.best-members {
+	margin-top: 20px;
+	margin-left: 0;
+	border-left: 1px solid grey;
+	position: absolute;
+	right: 0;
+}
+
+.container-fluid {
+	margin-top: 20px;
+	margin-left: 10px;
+}
+
+.question-box {
+	margin-left: 50px;
+	margin-right: 50px;
+	margin-bottom: 20px;
+	border: 3px solid gray;
+	border-radius: 15px;
+	padding: 10px;
+}
+
+.question-title {
+	font-size: 20px;
+	font-weight: bold;
+	margin-left: 30px;
+}
+
+.question-text {
+	margin-left: 30px;
+	border: 1px solid gray;
+	border-radius: 10px;
+	padding: 3px;
+	height: 75px;
+	overflow: hidden;
+}
+
+.question-img {
+	max-width: 100px;
+	border:solid orange;
+	border-radius: 15px;
+}
+
+.question-upvotes-downvotes {
+	margin-left: 4px;
+	margin-top: 10px;
+}
+
+.btn-upvote {
+	column-width: 2%;
+	color: #fff;
+	background-color: #218838;
+	border-color: #1e7e34;
+	border: 1px;
+	border-radius: 10;
+}
+
+.btn-downvote {
+	column-width: 2%;
+	color: #fff;
+	background-color: #c82333;
+	border-color: #bd2130;
+	border: 1px; 
+	border-radius: 10;
+}
+
+.like-counter {
+	margin: 5px;
+	font-weight: bold;
+	font-size: 20px;
+}
+
+.question-answers {
+	margin-left: 15px;
+}
+
+.question-tags {
+	margin-top: 8px;
+	font-weight: bold;
+}
+
+.question-tag {
+	margin-top: 1px;
+}
+
+.btns-pages {
+	position: relative;
+	left: 40%;
+}
+
+.btn-page {
+	margin-right: 5px;
+}
