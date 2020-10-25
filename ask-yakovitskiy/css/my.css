@@ -136,3 +136,100 @@ code {
 .btn-page {
 	margin-right: 5px;
 }
+
+
+
+
+
+.current-question-author-info {
+	max-width: 14%;
+}
+
+.current-question-img {
+	margin-left: 15px;
+	max-width: 100px;
+	border: 2px solid orange;
+	border-radius: 15px; 
+}
+
+.current-question-author {
+	margin-top: 20px;
+	margin-left: 15px;
+	font-weight: bold;
+	font-size: 20px;
+}
+
+.current-question-title {
+	margin-right: 20px;
+	margin-top: 20px;
+}
+
+.current-question-text {
+	border-bottom: 1px solid blue;
+}
+
+.current-question-info {
+	max-width: 90.6%;
+	margin-top: 15px;
+	padding-bottom: 10px; 
+}
+
+.current-question-tags {
+	max-width: 77%;
+	margin-left: 40px;
+	font-weight: bold;
+	border-bottom: 4px double blue;
+}
+
+.current-question-answer {
+	margin-left: 30px;
+	margin-top: 20px;
+	padding: 15px;
+	max-width: 86%;
+	border: 3px solid grey;
+	border-radius: 15px;
+}
+
+.current-question-answer-author {
+	font-weight: bold;
+}
+
+.current-question-answer-img {
+	max-width: 100px;
+	border: 2px solid orange;
+	border-radius: 10px;
+}
+
+.current-question-answer-text {
+	margin-left: 15px;
+	padding: 10px;
+	border: 1px solid grey;
+	border-radius: 15px;
+}
+
+.current-question-answer-checkbox {
+	margin-top: 15px;
+	margin-left: 35px;
+	scale: 2;
+}
+.current-question-answer-btn-group {
+	margin-left: 10px;
+	margin-top: 4px;
+}
+
+.current-question-new-answer-label {
+	margin-top: 30px;
+	margin-left: 15px;
+	font-weight: bold;
+}
+
+.current-question-new-answer-form {
+	max-width: 96.7%;
+	max-height: 30%;
+	margin-left: 15px;
+}
+
+.current-question-new-answer-btn {
+	margin-left: 15px;
+	margin-top: 5px;
+}
