@@ -227,9 +227,56 @@ code {
 	max-width: 96.7%;
 	max-height: 30%;
 	margin-left: 15px;
+	padding: 5px;
+	border: 1px solid grey;
+	border-radius: 15px;
 }
 
 .current-question-new-answer-btn {
 	margin-left: 15px;
 	margin-top: 5px;
+}
+
+
+.new-question-label {
+	font-weight: bold;
+	margin-top: 15px
+}
+
+.new-question-title-text {
+	border: 1px solid grey;
+	border-radius: 15px;
+	padding: 5px;
+	width: 500px;
+}
+
+.new-question-text-text {
+	border: 1px solid grey;
+	border-radius: 15px;
+	padding: 5px;
+}
+
+.new-question-tags-text {
+	border: 1px solid grey;
+	border-radius: 15px;
+	padding: 5px;
+	width: 500px;
+}
+
+
+.settings-login-text {
+	margin-left: 35px;
+}
+
+.settings-password-text {
+	margin-left: 5px;
+}
+
+.settings-email-text {
+	margin-left: 35px;
+}
+
+.settings-label-for-btn {
+	margin-top: 15px;
+	margin-bottom: 10px;
 }
