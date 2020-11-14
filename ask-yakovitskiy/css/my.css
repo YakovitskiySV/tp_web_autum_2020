@@ -22,17 +22,22 @@ code {
 .navbar-settings {
 	position: absolute;
 	right: 0;
-	margin-right: 80px;
+	margin-right: 90px;
 }
 
 .navbar-img {
 	position: absolute;
 	right: 0;
 	max-width: 50px;
-	margin-right: 150px;
+	margin-right: 170px;
 	border: solid orange 2px;
 	border-radius: 5px;
+}
 
+.navbar-user-name {
+	position: absolute;
+	right: 0;
+	margin-right: 230px;
 }
 
 .navbar-log-out {
