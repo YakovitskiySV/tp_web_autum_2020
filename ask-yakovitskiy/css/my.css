@@ -19,6 +19,27 @@ code {
   font-size: 80%;
 }
 
+.navbar-settings {
+	position: absolute;
+	right: 0;
+	margin-right: 80px;
+}
+
+.navbar-img {
+	position: absolute;
+	right: 0;
+	max-width: 50px;
+	margin-right: 150px;
+	border: solid orange 2px;
+	border-radius: 5px;
+
+}
+
+.navbar-log-out {
+	position: absolute;
+	right: 0;
+	margin-right: 20px;
+}
 
 .btn-sing-in {
 	position: absolute;
@@ -265,18 +286,20 @@ code {
 
 
 .settings-login-text {
-	margin-left: 35px;
 }
 
-.settings-password-text {
-	margin-left: 5px;
+.settings-old-password-text {
 }
 
 .settings-email-text {
-	margin-left: 35px;
 }
 
 .settings-label-for-btn {
 	margin-top: 15px;
 	margin-bottom: 10px;
+}
+
+.btn-registration-sing-up {
+	margin-top: 10px;
+	width: 250px;
 }
