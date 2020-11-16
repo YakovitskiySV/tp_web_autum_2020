@@ -1,0 +1,38 @@
+{% extends 'inc/base.html' %}
+{% load static %}
+
+{% block navbar %}
+  {% include 'inc/navbar-unauthorized.html' %}
+{% endblock navbar %}
+
+{% block content %}
+  <main role="main" class="flex-shrink-0">
+    <div class="container-fluid">
+      {% include 'inc/current-question.html' %}
+      
+      {% for answer in answers %}
+        {% include 'inc/current-question-answer.html' %}
+      {% endfor %}
+
+  <div class="row">
+    <div class="col-11">
+      <div class="col-11">
+        <form role="form">
+          <label for="current-question-new-answer-form"
+          class ="current-question-new-answer-label">Answer the question!</label>
+          <textarea class="form-control current-question-new-answer-form"
+          id="new-answer"
+          rows="7"></textarea>
+          <button type="submit" class="btn btn-primary current-question-new-answer-btn">
+          Submit answer
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</main>
+<script src="js/jquery.slim.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+{% endblock content %}

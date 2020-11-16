@@ -1,0 +1,311 @@
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+main > .container-fluid {
+  padding: 60px 15px 0;
+}
+
+.footer {
+  background-color: #f5f5f5;
+}
+
+.footer > .container {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+code {
+  font-size: 80%;
+}
+
+.navbar-settings {
+	position: absolute;
+	right: 0;
+	margin-right: 90px;
+}
+
+.navbar-img {
+	position: absolute;
+	right: 0;
+	max-width: 50px;
+	margin-right: 170px;
+	border: solid orange 2px;
+	border-radius: 5px;
+}
+
+.navbar-user-name {
+	position: absolute;
+	right: 0;
+	margin-right: 230px;
+}
+
+.navbar-log-out {
+	position: absolute;
+	right: 0;
+	margin-right: 20px;
+}
+
+.btn-sing-in {
+	position: absolute;
+	right: 0;
+	margin-right: 10px;
+}
+
+.btn-sing-up {
+	position: absolute;
+	right: 0;
+	margin-right: 88px;
+}
+
+.btn-ask {
+	margin-left: 4px;
+}
+
+.popular-tags {
+	margin-top: 80px;
+	border-left: 1px solid grey;
+	position: absolute;
+	right: 0;
+}
+
+.best-members {
+	margin-top: 20px;
+	margin-left: 0;
+	border-left: 1px solid grey;
+	position: absolute;
+	right: 0;
+}
+
+.index-paginator {
+	margin-left: 35%; 
+}
+
+.container-fluid {
+	margin-top: 20px;
+	margin-left: 10px;
+}
+
+.question-box {
+	margin-left: 50px;
+	margin-right: 50px;
+	margin-bottom: 20px;
+	border: 3px solid gray;
+	border-radius: 15px;
+	padding: 10px;
+}
+
+.question-title {
+	font-size: 20px;
+	font-weight: bold;
+	margin-left: 30px;
+}
+
+.question-text {
+	margin-left: 30px;
+	border: 1px solid gray;
+	border-radius: 10px;
+	padding: 10px;
+	height: 75px;
+	overflow: hidden;
+}
+
+.question-img {
+	max-width: 100px;
+	border:solid orange;
+	border-radius: 15px;
+}
+
+.question-upvotes-downvotes {
+	margin-left: 4px;
+	margin-top: 10px;
+}
+
+.btn-upvote {
+	column-width: 2%;
+	color: #fff;
+	background-color: #218838;
+	border-color: #1e7e34;
+	border: 1px;
+	border-radius: 10;
+}
+
+.btn-downvote {
+	column-width: 2%;
+	color: #fff;
+	background-color: #c82333;
+	border-color: #bd2130;
+	border: 1px; 
+	border-radius: 10;
+}
+
+.like-counter {
+	margin: 5px;
+	font-weight: bold;
+	font-size: 20px;
+}
+
+.question-answers {
+	margin-left: 15px;
+}
+
+.question-tags {
+	margin-top: 8px;
+	font-weight: bold;
+}
+
+.question-tag {
+	margin-top: 1px;
+}
+
+
+
+
+.current-question-author-info {
+	max-width: 14%;
+}
+
+.current-question-img {
+	margin-left: 15px;
+	max-width: 100px;
+	border: 2px solid orange;
+	border-radius: 15px; 
+}
+
+.current-question-author {
+	margin-top: 20px;
+	margin-left: 15px;
+	font-weight: bold;
+	font-size: 20px;
+}
+
+.current-question-title {
+	margin-right: 20px;
+	margin-top: 20px;
+}
+
+.current-question-text {
+}
+
+.current-question-info {
+	max-width: 90.6%;
+	margin-top: 15px;
+	padding-bottom: 10px; 
+}
+
+.current-question-tags {
+	max-width: 77%;
+	margin-left: 40px;
+	font-weight: bold;
+	border-bottom: 4px double blue;
+}
+
+.current-question-answer {
+	margin-left: 30px;
+	margin-top: 20px;
+	padding: 15px;
+	max-width: 86%;
+	border: 3px solid grey;
+	border-radius: 15px;
+}
+
+.current-question-answer-author {
+	font-weight: bold;
+}
+
+.current-question-answer-img {
+	max-width: 100px;
+	border: 2px solid orange;
+	border-radius: 10px;
+}
+
+.current-question-answer-text {
+	margin-left: 15px;
+	padding: 10px;
+	border: 1px solid grey;
+	border-radius: 15px;
+}
+
+.current-question-answer-checkbox {
+	margin-top: 15px;
+	margin-left: 35px;
+	scale: 2;
+}
+.current-question-answer-btn-group {
+	margin-left: 10px;
+	margin-top: 4px;
+}
+
+.current-question-new-answer-label {
+	margin-top: 30px;
+	margin-left: 15px;
+	font-weight: bold;
+}
+
+.current-question-new-answer-form {
+	max-width: 96.7%;
+	max-height: 30%;
+	margin-left: 15px;
+	padding: 5px;
+	border: 1px solid grey;
+	border-radius: 15px;
+}
+
+.current-question-new-answer-btn {
+	margin-left: 15px;
+	margin-top: 5px;
+}
+
+
+.new-question-label {
+	font-weight: bold;
+	margin-top: 15px
+}
+
+.new-question-title-text {
+	border: 1px solid grey;
+	border-radius: 15px;
+	padding: 5px;
+	width: 500px;
+}
+
+.new-question-text-text {
+	border: 1px solid grey;
+	border-radius: 15px;
+	padding: 5px;
+}
+
+.new-question-tags-text {
+	border: 1px solid grey;
+	border-radius: 15px;
+	padding: 5px;
+	width: 500px;
+}
+
+
+.settings-login-text {
+}
+
+.settings-old-password-text {
+}
+
+.settings-email-text {
+}
+
+.settings-label-for-btn {
+	margin-top: 15px;
+	margin-bottom: 10px;
+}
+
+.btn-registration-sing-up {
+	margin-top: 10px;
+	width: 250px;
+}
+
+.btn-sing-in-submit {
+	position: absolute;
+	left: 0;
+	margin-top: 10px;
+	margin-left: 15px;
+	width: 212px;
+}

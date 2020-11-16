@@ -1,0 +1,36 @@
+{% extends 'inc/base.html' %}
+{% block navbar %}
+	{% include 'inc/navbar-unauthorized.html' %}
+{% endblock navbar %}
+{% block content %}
+	<main role="main" class="flex-shrink-0">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-11">
+					<div class="col-11">
+						<h1>Sing-in</h1>
+						<div>
+							<label>Login / Email</label>
+							<div>
+								<input type="Login"
+								name="registration-login-text"
+								class="registration-login-text">
+							</div>
+						</div>
+						<div>
+							<label>Password</label>
+							<div>
+								<input type="Password"
+								name="registration-password-text"
+								class="registration-password-text">
+							</div>
+						</div>
+						<button type="submit" class="btn btn-success btn-sing-in-submit">
+						Sing-In!
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+{% endblock content %}

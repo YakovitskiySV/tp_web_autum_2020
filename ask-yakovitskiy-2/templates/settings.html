@@ -1,0 +1,64 @@
+{% extends 'inc/base.html' %}
+{% load static %}
+{% block navbar %}
+	{% include 'inc/navbar-unauthorized.html' %}
+{% endblock navbar %}
+{% block content %}
+	<main role="main" class="flex-shrink-0">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-11">
+					<div class="col-11">
+						<h1>Settings</h1>
+						<div>
+							<label>Login</label>
+							<div>
+								<input type="Login"
+								name="settings-login-text"
+								class="settings-login-text">
+							</div>
+						</div>
+						<div>
+							<label>Email</label>
+							<div>
+								<input type="Email"
+								name="settings-email-text"
+								class="settings-email-text">
+							</div>
+						</div>
+						<div>
+							<label>New password</label>
+							<div>
+								<input type="password"
+								name="settings-new-password-text"
+								class="settings-new-password-text">
+							</div>
+						</div>
+						<div>
+							<label>Confirm new password</label>
+							<div>
+								<input type="password"
+								name="settings-new-password-text"
+								class="settings-new-password-text">
+							</div>
+						</div>
+						<br>
+						<div>
+							<label for="current-avatar-img">Avatar</label>
+							<div>
+								<img class="question-img" src="{% static "img/question-mark.jpg" %}" id="current-avatar-img">
+							</div>
+							<div>
+								<label for ="new-avatar-img" class="settings-label-for-btn">choose avatar</label>
+								<input type="file" class="form-control-file" id="new-avatar-img">
+							</div>
+						</div>
+						<button type="submit" class="btn btn-success btn-registration-sing-up">
+						Apply changes!
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+{% endblock content %}

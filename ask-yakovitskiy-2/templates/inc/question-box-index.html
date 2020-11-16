@@ -1,0 +1,30 @@
+{% load static %}
+<div class="row">
+  <div class="col-10">
+    <div class="row question-box">
+      <div class="col-1">
+        <img class="question-img" src="{% static "img/question-mark.jpg" %}">
+        <div class="row question-upvotes-downvotes">
+          <div class="btn-group">
+            <button class="btn btn-xs btn-upvote">+</button>
+            <button class="btn btn-xs btn-downvote">-</button>
+            <div class="like-counter">10</div>
+          </div>
+        </div>
+        </img>
+      </div>
+      <div class="col-11">
+        <a class="btn btn-link question-title" href="{% url 'question' 1 %}">{{ question.title }}</a>
+        <div class="question-text">
+          {{ question.text }}
+        </div>
+        <div class="row question-answers">
+          <label class="btn btn-link btn-tag">Answers(3)</label>
+          <label class ="question-tags">Tags:</label>
+          <label class="btn btn-link btn-tag question-tag">Perl</label>
+          <label class="btn btn-link btn-tag question-tag">Django</label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

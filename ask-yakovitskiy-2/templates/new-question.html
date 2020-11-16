@@ -1,0 +1,43 @@
+{% extends 'inc/base.html' %}
+{% block navbar %}
+	{% include 'inc/navbar-unauthorized.html' %}
+{% endblock navbar %}
+{% block content %}
+<main role="main" class="flex-shrink-0">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-11">
+				<div class="col-11">
+					<h1>New Question</h1>
+					<div class="form-group">
+						<div>
+							<div>
+								<label class="new-question-label">Title</label>
+							</div>
+							<input type="new-question-title"
+							name="new-question-title"
+							class="new-question-title-text">
+						</div>
+						<div>
+							<label class="new-question-label">Text</label>
+							<textarea class="form-control	new-question-text-text"
+							id="new-question-text"
+							rows="7"></textarea>
+						</div>
+						<div>
+							<div>
+								<label class="new-question-label">Tags</label>
+							</div>
+							<input type="new-question-tags"
+							name="new-question-tags"
+							class="new-question-tags-text">
+							<button type="submit" class="btn btn-primary new-question-btn mb-2"> Ask question
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>
+{% endblock content %}

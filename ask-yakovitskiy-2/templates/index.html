@@ -1,0 +1,17 @@
+{% extends 'inc/base.html' %}
+{% load static %}
+{% block navbar %}
+  {% include 'inc/navbar-unauthorized.html' %}
+{% endblock navbar %}
+{% block content %}
+  <main role="main" class="flex-shrink-0">
+    <div class="container-fluid">
+      {% for question in questions %}
+        {%include 'inc/question-box-index.html' %}
+      {% endfor %}
+    </div>
+  </main>
+{% endblock content %}
+{% block paginator %}
+  {%include 'inc/paginator.html' %}
+{% endblock paginator %}
