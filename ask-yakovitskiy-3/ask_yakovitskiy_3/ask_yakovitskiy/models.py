@@ -38,16 +38,27 @@ class Answer(models.Model):
         verbose_name = 'Ответ'
         verbose_name_plural = 'Ответы'
         
-class Like(models.Model):
+class LikeQuestion(models.Model):
     user = models.ForeignKey('Profile', on_delete=models.CASCADE, verbose_name = 'Пользователь')
-    questions = models.ManyToManyField('Question', verbose_name = 'Вопрос') 
+    question = models.ForeignKey('Question', on_delete=models.CASCADE, verbose_name = 'Вопрос') 
     opinion = models.IntegerField(verbose_name = 'Мнение')
     def __str__(self):
-        return self.opinion
+        return self.user.user_id.get_username() + ' оценил ' + self.question.title
     
     class Meta:
-        verbose_name = 'Лайк'
-        verbose_name_plural = 'Лайки' 
+        verbose_name = 'Лайк на вопрос'
+        verbose_name_plural = 'Лайки на вопросы'
+        
+class LikeAnswer(models.Model):
+    user = models.ForeignKey('Profile', on_delete=models.CASCADE, verbose_name = 'Пользователь')
+    answer = models.ForeignKey('Answer', on_delete=models.CASCADE, verbose_name = 'Вопрос') 
+    opinion = models.IntegerField(verbose_name = 'Мнение')
+    def __str__(self):
+        return self.user.user_id.get_username() + ' оценил ответ в ' + self.answer.question.title + ' пользователя ' + self.answer.author.user_id.get_username()
+    
+    class Meta:
+        verbose_name = 'Лайк на ответ'
+        verbose_name_plural = 'Лайки на ответы' 
 
 
 class Tag(models.Model):
