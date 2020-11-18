@@ -1,13 +1,13 @@
 {% load static %}
 <div class="row">
   <div class="col-2 current-question-author-info">
-    <div class="current-question-author">Mega-asker</div>
+    <div class="current-question-author">{{ currentQuestion.author }}</div>
     <img class="current-question-img" src="{% static "img/question-mark.jpg" %}"></img>
     <div class="col-11 current-question-info">
       <div class="btn-group">
         <button class="btn btn-xs btn-upvote">+</button>
         <button class="btn btn-xs btn-downvote">-</button>
-        <div class="like-counter">10</div>
+        <div class="like-counter">{{ currentQuestion.rating }}</div>
       </div>
     </div>
   </div>
@@ -23,7 +23,8 @@
 <div class="row">
 <div class="col-11 current-question-tags">
   <label>Tags:</label>
-  <a href="#">Perl</a>
-  <a href="#">Django</a>
+  {% for tag in currentQuestion.tags.all %}
+    <a href="#">{{ tag }}</a>
+  {% endfor %}
 </div>
 </div>
