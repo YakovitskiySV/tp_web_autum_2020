@@ -41,4 +41,8 @@ def question(request, pk):
     })
     
 def questionsByTag(request, tag):
-    return index(request)
+    questions_page = paginate(Question.objects.filter(tags__name=tag), request)
+    return render(request, 'index.html', {
+        'questions': questions_page,
+    })
+    
