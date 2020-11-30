@@ -1,0 +1,33 @@
+{% extends 'inc/base.html' %}
+{% load bootstrap4 %}
+
+{% block navbar %}
+	{% include 'inc/navbar-unauthorized.html' %}
+{% endblock navbar %}
+{% block content %}
+	<main role="main" class="flex-shrink-0">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-11">
+					<div class="col-11">
+						<h1>Sing-in</h1>
+						<form class="form" method="POST" action="/sing-in/" enctype="">
+							{% csrf_token %}
+							{% bootstrap_form form %}
+							{% if request.GET.next %}
+								<input type="hidden" name="next" value="{{ request.GET.next }}">
+							{% endif %}
+							<div>
+							{% buttons %}
+								<button type="submit" class="btn btn-success btn-sing-in-submit">
+								Sing-In!
+							{% endbuttons %}
+							</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+{% endblock content %}
