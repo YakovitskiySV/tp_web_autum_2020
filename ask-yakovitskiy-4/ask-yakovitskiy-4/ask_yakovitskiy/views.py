@@ -39,7 +39,18 @@ def newQuestion(request):
             question.author = Profile.objects.get(user=request.user.pk)
             question.rating = 0
             question.answers_number = 0
+            tags = form.cleaned_data.get('tags').split()
+            print('\n\n\n %s \n\n\n' % tags)
             question.save()
+            if len(tags) <= 3:
+                for tag in tags:
+                    try:
+                        Tag.objects.get(name=tag)
+                    except Tag.DoesNotExist:
+                        Tag.objects.create(name=tag)
+                    question.tags.set(Tag.objects.filter(name__in=tags))
+            #else:
+                #pass
             return redirect(reverse('question', kwargs={'pk': question.pk}))
     ctx = {'form': form}
     return render(request, 'new-question.html', ctx)
@@ -64,13 +75,15 @@ def settings(request):
                     return render(request, 'settings.html', ctx)
                 except User.DoesNotExist:
                     current_user.username = form.cleaned_data['username']
+                    
                 if form.cleaned_data['email'] != '':
                     if not User.objects.filter(email=form.cleaned_data['email']).exists():
                         current_user.email = form.cleaned_data['email']
-
+                        
                 if form.cleaned_data['new_password'] != '' and form.cleaned_data['new_password'] == form.cleaned_data['confirm_new_password']:
                     current_user.set_password(form.cleaned_data['new_password'])
                     auth.login(request, current_user)
+                    
                 if form.cleaned_data['avatar'] is not None:
                     current_user.avatar = form.cleaned_data['avatar']
                 current_user.save()

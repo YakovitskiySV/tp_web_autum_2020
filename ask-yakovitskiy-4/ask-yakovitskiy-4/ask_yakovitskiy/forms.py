@@ -9,11 +9,11 @@ class LoginForm(forms.Form):
 
 
 class NewQuestionForm(forms.ModelForm):
-    new_tag = forms.CharField(label='Own tag...', required=False)
+    tags = forms.CharField(required=False)
     
     class Meta:
         model = Question
-        fields = ['title', 'text', 'tags']
+        fields = ['title', 'text']
         
 class AnswerForm(forms.ModelForm):
     
