@@ -56,9 +56,7 @@ def settings(request):
     else:
         form = SettingsForm(data=request.POST)
         if form.is_valid():
-            print('\n\n\n jopa \n\n\n')
             if current_user.check_password(form.cleaned_data['old_password']):
-                print('\n\n\n jopa0 \n\n\n')
                 try:
                     if User.objects.get(username=form.cleaned_data['username']).username == form.cleaned_data['username']:
                         raise User.DoesNotExist 
@@ -66,19 +64,14 @@ def settings(request):
                     return render(request, 'settings.html', ctx)
                 except User.DoesNotExist:
                     current_user.username = form.cleaned_data['username']
-                print('\n\n\n jopaOGO \n\n\n')
-                if form.cleaned_data['email'] != '': #and User.objects.filter(email=form.cleaned_data['email']).count() <= 1
-                    print('\n\n\n jopa2 \n\n\n')
-                    if User.objects.filter(email=form.cleaned_data['email']).exists():
-                        print('\n\n jopa2_1\n\n')
-                        if current_user == User.objects.get(email=form.cleaned_data['email']):
-                            print('jopa2_2')
-                            current_user.email = form.cleaned_data['email']
+                if form.cleaned_data['email'] != '':
+                    if not User.objects.filter(email=form.cleaned_data['email']).exists():
+                        current_user.email = form.cleaned_data['email']
 
-                if form.cleaned_data['new_password'] != '':
+                if form.cleaned_data['new_password'] != '' and form.cleaned_data['new_password'] == form.cleaned_data['confirm_new_password']:
                     current_user.set_password(form.cleaned_data['new_password'])
+                    auth.login(request, current_user)
                 if form.cleaned_data['avatar'] is not None:
-                    print('\n\n\n jopa4 \n\n\n')
                     current_user.avatar = form.cleaned_data['avatar']
                 current_user.save()
     ctx = {'form': form}
@@ -165,7 +158,6 @@ def question(request, pk):
         return redirect('/question/%s/?page=%s' % (pk, pages_number))
     current_question = Question.objects.get(pk=pk)
     answers_page = paginate(request, Answer.objects.filter(question=pk), STD_PER_PAGE)
-    print('\n\n\n %s \n\n\n' % (answers_page.object_list))
     ctx = {
         'form': form,
         'currentQuestion': current_question,

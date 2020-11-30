@@ -28,13 +28,15 @@ class UserForm(UserCreationForm):
         model = User
         fields = ['username', 'email']
 
-class SettingsForm(forms.ModelForm):
+class SettingsForm(forms.Form):
+    username = forms.CharField(required=True, label='nick-name')
+    email = forms.EmailField(required=True,
+                             label='email adress',
+                             help_text='your email adress wont be shown to anybody else')
     new_password = forms.CharField(required=False, widget=forms.PasswordInput())
+    confirm_new_password = forms.CharField(required=False, widget=forms.PasswordInput())
     avatar = forms.ImageField(required=False)
     old_password = forms.CharField(required=True,
                                    widget=forms.PasswordInput(),
-                                   help_text='Please, enter your current password to apply changes')
+                                   help_text='Enter your current password, to apply changes')
     
-    class Meta:
-        model = User
-        fields = ['username', 'email']        
