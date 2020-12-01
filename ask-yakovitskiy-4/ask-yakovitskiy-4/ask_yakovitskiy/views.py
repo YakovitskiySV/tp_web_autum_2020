@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
-from django.contrib import auth
+from django.contrib import auth, messages
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.contrib.auth.models import User
@@ -29,7 +29,6 @@ def newQuestions(request):
 
 @login_required
 def newQuestion(request):
-    form = NewQuestionForm()
     if request.method == 'GET':
         form = NewQuestionForm()
     else:
@@ -40,7 +39,6 @@ def newQuestion(request):
             question.rating = 0
             question.answers_number = 0
             tags = form.cleaned_data.get('tags').split()
-            print('\n\n\n %s \n\n\n' % tags)
             question.save()
             if len(tags) <= 3:
                 for tag in tags:
@@ -49,9 +47,14 @@ def newQuestion(request):
                     except Tag.DoesNotExist:
                         Tag.objects.create(name=tag)
                     question.tags.set(Tag.objects.filter(name__in=tags))
-            #else:
-                #pass
+            else:
+                question.delete()
+                form.add_error('tags', 'Please, enter 3 or less tags for your question')
+                ctx = {'form': form}
+                return render(request, 'new-question.html', ctx)
             return redirect(reverse('question', kwargs={'pk': question.pk}))
+        else:
+            form.add_error(None, 'Please input valid data')
     ctx = {'form': form}
     return render(request, 'new-question.html', ctx)
 
@@ -67,54 +70,68 @@ def settings(request):
     else:
         form = SettingsForm(data=request.POST)
         if form.is_valid():
+            ctx = {'form': form}
             if current_user.check_password(form.cleaned_data['old_password']):
                 try:
-                    if User.objects.get(username=form.cleaned_data['username']).username == form.cleaned_data['username']:
-                        raise User.DoesNotExist 
-                    ctx = {'form': form, 'error': 'This username already exists'}
+                    if User.objects.get(username=form.cleaned_data['username']).username == current_user.username:
+                        raise User.DoesNotExist
+                    form.add_error('username', 'This username is already in use') 
+                    ctx = {'form': form}
                     return render(request, 'settings.html', ctx)
                 except User.DoesNotExist:
                     current_user.username = form.cleaned_data['username']
                     
-                if form.cleaned_data['email'] != '':
-                    if not User.objects.filter(email=form.cleaned_data['email']).exists():
-                        current_user.email = form.cleaned_data['email']
+                if not User.objects.filter(email=form.cleaned_data['email']).exists():
+                    current_user.email = form.cleaned_data['email']
+                elif User.objects.get(email=form.cleaned_data['email']) != current_user:
+                    form.add_error('email', 'This email is already in use')
                         
-                if form.cleaned_data['new_password'] != '' and form.cleaned_data['new_password'] == form.cleaned_data['confirm_new_password']:
+                if form.cleaned_data['new_password'] != None and form.cleaned_data['new_password'] == form.cleaned_data['confirm_new_password']:
                     current_user.set_password(form.cleaned_data['new_password'])
                     auth.login(request, current_user)
+                else:   
+                    form.add_error('confirm_new_password', 'Passwords should match')
                     
                 if form.cleaned_data['avatar'] is not None:
                     current_user.avatar = form.cleaned_data['avatar']
                 current_user.save()
+            else:
+                form.add_error('old_password', 'Please, enter your CURRENT password correctly')
+        else:
+            form.add_error(None, 'Please, enter valid data')
     ctx = {'form': form}
     return render(request, 'settings.html', ctx)
-
-def AddUser(request, form):
-    if form.is_valid():
-        user = form.save()
-        user.refresh_from_db()
-        if User.objects.get(username=user.username):
-            user.save()
-            profile = Profile()
-            profile.user = user
-            if profile.avatar is not None:
-                profile.avatar = form.cleaned_data['avatar']
-            else:
-                profile.avatar = "img/question-mark.jpg"
-            profile.save()
-            auth.authenticate(username=user.username, password=form.cleaned_data.get('password'))
-            auth.login(request, user)
-        else:
-            pass
 
 def singUp(request):
     if request.method == 'GET':
         form = UserForm()
     else:
         form = UserForm(data=request.POST)
-        AddUser(request, form)
-        return redirect("/")
+        ctx = {'form': form}
+        if form.is_valid():
+            if User.objects.filter(username=form.cleaned_data['username']).exists():
+                form.add_error('username', 'This username is already in use')
+                return render(request, 'sing-up.html', ctx)
+            if User.objects.filter(email=form.cleaned_data['email']).exists():
+                form.add_error('email', 'This email is already in use')
+                return render(request, 'sing-up.html', ctx)
+            user = form.save()
+            user.refresh_from_db()
+            if User.objects.get(username=user.username):
+                user.save()
+                profile = Profile()
+                profile.user = user
+                if form.cleaned_data['avatar'] is not None:
+                    profile.avatar = form.cleaned_data['avatar']
+                else:
+                    profile.avatar = "img/question-mark.jpg"
+                profile.save()
+                auth.authenticate(username=user.username, password=form.cleaned_data.get('password'))
+                auth.login(request, user)
+            else:
+                form.add_error(None, 'Unknown error at creating user')
+                return render(request, 'sing-up.html', ctx)
+            return redirect("/")
     ctx = {'form': form}
     return render(request, 'sing-up.html', ctx)
 
@@ -124,6 +141,7 @@ def singIn(request):
     else:
         form = LoginForm(data=request.POST)
         if form.is_valid():
+            ctx = {'form': form}
             user = auth.authenticate(request, **form.cleaned_data)
             if user is not None:
                 auth.login(request, user)
@@ -132,9 +150,9 @@ def singIn(request):
                 else:
                     return redirect("/")
             else:
-                pass
+                form.add_error(None, 'Incorrect login or password')
         else:
-            pass
+            form.add_error(None, 'Please, enter valid data')
     ctx = {'form': form}
     return render(request, 'sing-in.html', ctx)
 
@@ -169,7 +187,7 @@ def question(request, pk):
         if answers_number % STD_PER_PAGE != 0:
             pages_number = pages_number + 1
         return redirect('/question/%s/?page=%s' % (pk, pages_number))
-    current_question = Question.objects.get(pk=pk)
+    current_question = get_object_or_404(Question, pk=pk)
     answers_page = paginate(request, Answer.objects.filter(question=pk), STD_PER_PAGE)
     ctx = {
         'form': form,
@@ -177,7 +195,6 @@ def question(request, pk):
         'answers': answers_page,
         }
     return render(request, 'question.html', ctx)
-
     
 def questionsByTag(request, tag):
     questions_page = paginate(request, Question.objects.filter(tags__name=tag))

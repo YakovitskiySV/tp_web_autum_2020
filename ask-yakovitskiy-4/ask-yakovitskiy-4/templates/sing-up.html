@@ -15,6 +15,11 @@
 						<h1>Registration</h1>
 						<form class="form" method="POST">
 							{% csrf_token %}
+							{% for dict in form.errors %}
+								{% for error in dict.values %}
+									{{ error }}
+								{% endfor %}
+							{% endfor %}
 							{% bootstrap_form form %}
 							{% buttons %}
 							<button type="submit" class="btn btn-success btn-registration-sing-up">

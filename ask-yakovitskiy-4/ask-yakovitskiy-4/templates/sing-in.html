@@ -13,6 +13,11 @@
 						<h1>Sing-in</h1>
 						<form class="form" method="POST" action="/sing-in/" enctype="">
 							{% csrf_token %}
+							{% for dict in form.errors %}
+								{% for error in dict.values %}
+									{{ error }}
+								{% endfor %}
+							{% endfor %}
 							{% bootstrap_form form %}
 							{% if request.GET.next %}
 								<input type="hidden" name="next" value="{{ request.GET.next }}">
