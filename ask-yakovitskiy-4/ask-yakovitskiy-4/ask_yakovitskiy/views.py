@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.contrib.auth.models import User
 from ask_yakovitskiy.models import Question, Answer, Profile, LikeAnswer, LikeQuestion, Tag
-from ask_yakovitskiy.forms import LoginForm, UserForm, NewQuestionForm, AnswerForm, SettingsForm
+from ask_yakovitskiy.forms import LoginForm, UserForm, NewQuestionForm, AnswerForm, SettingsForm, ImageForm
 import datetime
 
 STD_PER_PAGE = 5
@@ -62,15 +62,17 @@ def newQuestion(request):
 def settings(request):
     current_user = request.user
     if request.method == 'GET':
+        image_form = ImageForm(initial={'avatar': Profile.objects.get(user=current_user).avatar},)
         form = SettingsForm(initial={
             'username': current_user.username,
             'email': current_user.email,
             'avatar': Profile.objects.get(user=current_user).avatar,
         })
     else:
-        form = SettingsForm(data=request.POST)
+        form = SettingsForm(data=request.POST, files=request.FILES)
+        image_form = ImageForm(data=request.POST, files=request.FILES, instance=current_user.profile)
         if form.is_valid():
-            ctx = {'form': form}
+            ctx = {'form': form, 'image_form': image_form}
             if current_user.check_password(form.cleaned_data['old_password']):
                 try:
                     if User.objects.get(username=form.cleaned_data['username']).username == current_user.username:
@@ -86,20 +88,22 @@ def settings(request):
                 elif User.objects.get(email=form.cleaned_data['email']) != current_user:
                     form.add_error('email', 'This email is already in use')
                         
-                if form.cleaned_data['new_password'] != None and form.cleaned_data['new_password'] == form.cleaned_data['confirm_new_password']:
-                    current_user.set_password(form.cleaned_data['new_password'])
-                    auth.login(request, current_user)
-                else:   
-                    form.add_error('confirm_new_password', 'Passwords should match')
+                if form.cleaned_data['new_password'] != '':
+                    if form.cleaned_data['new_password'] == form.cleaned_data['confirm_new_password']:
+                        current_user.set_password(form.cleaned_data['new_password'])
+                        auth.login(request, current_user)
+                    else:
+                        form.add_error('confirm_new_password', 'Passwords should match')
                     
-                if form.cleaned_data['avatar'] is not None:
-                    current_user.avatar = form.cleaned_data['avatar']
+                if image_form.data['avatar'] is not None:
+                    image_form.save()
+                    #current_user.profile.avatar = image_form.data['avatar']
                 current_user.save()
-            else:
+            else:                
                 form.add_error('old_password', 'Please, enter your CURRENT password correctly')
         else:
             form.add_error(None, 'Please, enter valid data')
-    ctx = {'form': form}
+    ctx = {'form': form, 'image_form': image_form}
     return render(request, 'settings.html', ctx)
 
 def singUp(request):

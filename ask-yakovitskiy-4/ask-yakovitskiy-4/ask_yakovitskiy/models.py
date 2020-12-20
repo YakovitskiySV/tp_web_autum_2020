@@ -4,7 +4,8 @@ from django.contrib.auth.models import User
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name = 'id пользователя')
-    avatar = models.ImageField(max_length=1024, verbose_name = 'Аватар', null = True)
+    avatar = models.ImageField(max_length=1024, default='question-mark.jpg',
+                               verbose_name = 'Аватар', null = True, upload_to='avatar/%y/%m/%d')
 
     def __str__(self):
         return self.user.get_username()
@@ -69,7 +70,7 @@ class LikeQuestion(models.Model):
                 self.question.rating -= 1
             self.question.save()
         super(LikeQuestion, self).save(*args, **kwargs)
-
+    
     def delete(self, *args, **kwargs):
         if self.opinion:
             self.question.rating -= 1
@@ -79,6 +80,7 @@ class LikeQuestion(models.Model):
         super(LikeQuestion, self).delete(*args, **kwargs)
     
     class Meta:
+        #unique_together = ('user', 'question')
         verbose_name = 'Лайк на вопрос'
         verbose_name_plural = 'Лайки на вопросы'
         
@@ -107,9 +109,10 @@ class LikeAnswer(models.Model):
         super(LikeAnswer, self).delete(*args, **kwargs)
     
     class Meta:
+        #unique_together = ('user', 'answer')
         verbose_name = 'Лайк на ответ'
-        verbose_name_plural = 'Лайки на ответы' 
-
+        verbose_name_plural = 'Лайки на ответы'
+        
 
 class Tag(models.Model):
     name = models.CharField(max_length=64, verbose_name = 'Название')

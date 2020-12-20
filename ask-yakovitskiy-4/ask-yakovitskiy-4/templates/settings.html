@@ -12,13 +12,14 @@
 				<div class="col-11">
 					<div class="col-11">
 						<h1>Settings</h1>
-						<form class="form" method="POST" novalidate>
+						<form class="form" method="POST" novalidate enctype="multipart/form-data">
 							{% csrf_token %}
 							{% for dict in form.errors %}
 								{% for error in dict.values %}
 									{{ error }}
 								{% endfor %}
 							{% endfor %}
+							{% bootstrap_form image_form %}
 							{% bootstrap_form form %}
 							{% buttons %}
 							<button type="submit" class="btn btn-success btn-registration-sing-up">Apply changes!</button>

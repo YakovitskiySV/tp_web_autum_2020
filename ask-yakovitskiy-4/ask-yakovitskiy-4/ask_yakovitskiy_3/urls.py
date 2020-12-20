@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from ask_yakovitskiy import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 admin.autodiscover()
 
@@ -31,4 +33,4 @@ urlpatterns = [
     path('log-out/', views.LogOut, name='log-out'),
     path('question/<int:pk>/', views.question, name='question'),
     path('questions-by-tag/<tag>/', views.questionsByTag, name='question-by-tag')
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

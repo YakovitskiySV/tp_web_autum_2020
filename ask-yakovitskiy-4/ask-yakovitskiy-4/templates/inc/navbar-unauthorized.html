@@ -14,7 +14,7 @@
 	<a href="{% url 'settings' %}" class="navbar-settings">Settings</a>
 	<a href="{% url 'log-out' %}" class="navbar-log-out">Log-out</a>
   
-	<img class="navbar-img" src="{% static "img/question-mark.jpg" %}">
+	<img class="navbar-img" src="{{ request.user.profile.avatar.url }}"></img>
 {% else %}
   <a class="btn btn-secondary btn-sing-in" href="{% url 'sing-in' %}">Sing in</a>
   <a class="btn btn-primary btn-sing-up" href="{% url 'sing-up' %}">Sing up</a>

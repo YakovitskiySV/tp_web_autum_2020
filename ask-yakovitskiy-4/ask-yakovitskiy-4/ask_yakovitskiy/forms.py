@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from ask_yakovitskiy.models import Question, Answer
+from ask_yakovitskiy.models import Question, Answer, Profile
 
 class LoginForm(forms.Form):
     username = forms.CharField(required=True)
@@ -40,3 +40,9 @@ class SettingsForm(forms.Form):
                                    widget=forms.PasswordInput(),
                                    help_text='Enter your current password, to apply changes')
     
+class ImageForm(forms.ModelForm):
+    
+    class Meta:
+        model = Profile
+        fields = ['avatar']
+        
