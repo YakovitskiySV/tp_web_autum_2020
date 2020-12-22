@@ -80,7 +80,7 @@ class LikeQuestion(models.Model):
         super(LikeQuestion, self).delete(*args, **kwargs)
     
     class Meta:
-        #unique_together = ('user', 'question')
+        unique_together = ('user', 'question')
         verbose_name = 'Лайк на вопрос'
         verbose_name_plural = 'Лайки на вопросы'
         
@@ -109,7 +109,7 @@ class LikeAnswer(models.Model):
         super(LikeAnswer, self).delete(*args, **kwargs)
     
     class Meta:
-        #unique_together = ('user', 'answer')
+        unique_together = ('user', 'answer')
         verbose_name = 'Лайк на ответ'
         verbose_name_plural = 'Лайки на ответы'
         
