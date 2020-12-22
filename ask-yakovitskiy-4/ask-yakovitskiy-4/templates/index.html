@@ -15,3 +15,7 @@
 {% block paginator %}
   {%include 'inc/paginator.html' %}
 {% endblock paginator %}
+
+{% block jscode %}
+  <script src="{% static "js/vote.js" %}"></script>
+{% endblock %}

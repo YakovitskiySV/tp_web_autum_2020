@@ -28,6 +28,11 @@
 </div>
 </main>
 {% endblock content %}
+
 {% block paginator %}
   {% include 'inc/paginator2.html' %}
 {% endblock paginator %}
+
+{% block jscode %}
+  <script src="{% static "js/vote.js" %}"></script>
+{% endblock %}

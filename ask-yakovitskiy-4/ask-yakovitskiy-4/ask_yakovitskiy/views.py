@@ -2,7 +2,9 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
 from django.contrib import auth, messages
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
 from django.urls import reverse
+from django.http import JsonResponse
 from django.contrib.auth.models import User
 from ask_yakovitskiy.models import Question, Answer, Profile, LikeAnswer, LikeQuestion, Tag
 from ask_yakovitskiy.forms import LoginForm, UserForm, NewQuestionForm, AnswerForm, SettingsForm, ImageForm
@@ -97,7 +99,6 @@ def settings(request):
                     
                 if image_form.data['avatar'] is not None:
                     image_form.save()
-                    #current_user.profile.avatar = image_form.data['avatar']
                 current_user.save()
             else:                
                 form.add_error('old_password', 'Please, enter your CURRENT password correctly')
@@ -204,4 +205,127 @@ def questionsByTag(request, tag):
     questions_page = paginate(request, Question.objects.filter(tags__name=tag))
     ctx = {'questions': questions_page}
     return render(request, 'index.html', ctx)
+
+
+@require_POST
+@login_required
+def voteQuestion(request):
+    data = request.POST
+    from pprint import pformat
+    print('\n\n', '=' * 100)
+    print(f'HERE: {pformat(data)}')
+    print('=' * 100, '\n\n')
+    current_profile = Profile.objects.get(user=request.user)
+    current_question = Question.objects.get(pk=data['qpk'])
+    if LikeQuestion.objects.filter(user=current_profile, question=current_question).exists():
+        current_vote = LikeQuestion.objects.get(user=current_profile, question=current_question)
+        if current_vote.opinion == True:
+            if data['action'] == 'up-vote':
+                print('\n\n up delete \n\n')
+                current_vote.delete()
+            elif data['action'] == 'down-vote':
+                print('\n\n down rewrite \n\n')
+                current_vote.opinion = False
+                current_question.rating -= 2
+                current_vote.save()
+                current_question.save()
+                
+        elif current_vote.opinion == False:
+            if data['action'] == 'up-vote':
+                print('\n\n up rewrite \n\n')
+                current_vote.opinion = True
+                current_question.rating += 2
+                current_vote.save()
+                current_question.save()
+                
+            elif data['action'] == 'down-vote':
+                print('\n\n down delete \n\n')
+                current_vote.delete()
+    else:
+        if data['action'] == 'up-vote':
+            print('\n\n up create \n\n')
+            LikeQuestion.objects.create(question=current_question,
+                                        user=current_profile,
+                                        opinion=True
+                                        )
+        elif data['action'] == 'down-vote':
+            print('\n\n down create \n\n')
+            LikeQuestion.objects.create(question=current_question,
+                                        user=current_profile,
+                                        opinion=False
+                                        )
+    current_question = Question.objects.get(pk=data['qpk'])
+    data_to_send = {'rating': current_question.rating}
+    return JsonResponse(data_to_send)
+    
+@require_POST
+@login_required
+def voteAnswer(request):
+    data = request.POST
+    from pprint import pformat
+    print('\n\n', '=' * 100)
+    print(f'HERE: {pformat(data)}')
+    print('=' * 100, '\n\n')
+    current_profile = Profile.objects.get(user=request.user)
+    current_answer = Answer.objects.get(pk=data['apk'])
+    if LikeAnswer.objects.filter(user=current_profile, answer=current_answer).exists():
+        current_vote = LikeAnswer.objects.get(user=current_profile, answer=current_answer)
+        if current_vote.opinion == True:
+            if data['action'] == 'up-vote':
+                print('\n\n up delete \n\n')
+                current_vote.delete()
+            elif data['action'] == 'down-vote':
+                print('\n\n down rewrite \n\n')
+                current_vote.opinion = False
+                current_answer.rating -= 2
+                current_vote.save()
+                current_answer.save()
+                
+        elif current_vote.opinion == False:
+            if data['action'] == 'up-vote':
+                print('\n\n up rewrite \n\n')
+                current_vote.opinion = True
+                current_answer.rating += 2
+                current_vote.save()
+                current_answer.save()
+                
+            elif data['action'] == 'down-vote':
+                print('\n\n down delete \n\n')
+                current_vote.delete()
+    else:
+        if data['action'] == 'up-vote':
+            print('\n\n up create \n\n')
+            LikeAnswer.objects.create(answer=current_answer,
+                                        user=current_profile,
+                                        opinion=True
+                                        )
+        elif data['action'] == 'down-vote':
+            print('\n\n down create \n\n')
+            LikeAnswer.objects.create(answer=current_answer,
+                                        user=current_profile,
+                                        opinion=False
+                                        )
+    current_answer = Answer.objects.get(pk=data['apk'])
+    data_to_send = {'rating': current_answer.rating}
+    return JsonResponse(data_to_send)
+
+@require_POST
+@login_required
+def setRight(request):
+    data = request.POST
+    current_profile = Profile.objects.get(user=request.user)
+    current_answer = Answer.objects.get(pk=data['apk'])
+    current_question = current_answer.question
+    if current_question.author == current_profile:
+        if current_answer.is_correct:
+            current_answer.is_correct = False
+        else:
+            current_answer.is_correct = True
+        current_answer.save()
+        data_to_send = {'checked': current_answer.is_correct}
+        return JsonResponse(data_to_send)
+    else:
+        data_to_send = JsonResponse({'error': 'You are not the question author to do it'})
+        data_to_send.status_code = 403
+        return data_to_send
     

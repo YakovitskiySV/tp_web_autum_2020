@@ -3,11 +3,11 @@
   <div class="col-10">
     <div class="row question-box">
       <div class="col-1">
-        <img class="question-img" src="{% static question.author.avatar %}">
+        <img class="question-img" src="{% static question.author.avatar %}"></img>
         <div class="row question-upvotes-downvotes">
           <div class="btn-group">
-            <button class="btn btn-xs btn-upvote">+</button>
-            <button class="btn btn-xs btn-downvote">-</button>
+            <button class="btn btn-xs btn-upvote js-vote" data-action="up-vote" data-qpk="{{ question.pk }}">+</button>
+            <button class="btn btn-xs btn-downvote js-vote" data-action="down-vote" data-qpk="{{ question.pk }}">-</button>
             <div class="like-counter">{{ question.rating }}</div>
           </div>
         </div>

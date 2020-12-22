@@ -2,11 +2,11 @@
 <div class="row">
   <div class="col-2 current-question-author-info">
     <div class="current-question-author">{{ currentQuestion.author }}</div>
-    <img class="current-question-img" src="{% static "img/question-mark.jpg" %}"></img>
+    <img class="current-question-img" src="{{ currentQuestion.author.avatar.url }}"></img>
     <div class="col-11 current-question-info">
       <div class="btn-group">
-        <button class="btn btn-xs btn-upvote">+</button>
-        <button class="btn btn-xs btn-downvote">-</button>
+        <button class="btn btn-xs btn-upvote js-vote" data-action="up-vote" data-qpk="{{ currentQuestion.pk }}">+</button>
+        <button class="btn btn-xs btn-downvote js-vote" data-action="down-vote" data-qpk="{{ currentQuestion.pk }}">-</button>
         <div class="like-counter">{{ currentQuestion.rating }}</div>
       </div>
     </div>

@@ -35,7 +35,6 @@ class SettingsForm(forms.Form):
                              help_text='your email adress wont be shown to anybody else')
     new_password = forms.CharField(required=False, widget=forms.PasswordInput())
     confirm_new_password = forms.CharField(required=False, widget=forms.PasswordInput())
-    avatar = forms.ImageField(required=False)
     old_password = forms.CharField(required=True,
                                    widget=forms.PasswordInput(),
                                    help_text='Enter your current password, to apply changes')
@@ -45,4 +44,5 @@ class ImageForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['avatar']
+        required = None
         
