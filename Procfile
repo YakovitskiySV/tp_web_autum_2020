@@ -1,1 +1,1 @@
-web: pipenv run python src/manage.py runserver $PORT
+web: pipenv run python ask-yakovitskiy-4/ask-yakovitskiy-4/manage.py runserver $PORT
