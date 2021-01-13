@@ -10,9 +10,7 @@ blinker==1.4
 certifi==2019.11.28
 chardet==3.0.4
 Click==7.0
-command-not-found==0.3
 constantly==15.1.0
-cpplint==1.5.4
 cryptography==2.8
 cupshelpers==1.0
 dbus-python==1.2.16
