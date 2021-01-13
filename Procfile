@@ -1,0 +1,1 @@
+web: gunicorn ask_yakovitskiy_3.wsgi --log-file -
